@@ -24,7 +24,7 @@ end
 
 rule "BookingService can return null qty" 
 	when
-		Double( this == null ) from bookingService.getNullQty()
+		not Double() from bookingService.getNullQty()
 	then
 		log.info("BookingService can return NULL qty");
 end

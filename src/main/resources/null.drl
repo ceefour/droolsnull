@@ -1,0 +1,51 @@
+package com.hendyirawan.droolsnull
+dialect "mvel"
+
+import org.slf4j.*;
+
+import com.hendyirawan.droolsnull.*;
+
+global Logger log;
+global BookingService bookingService;
+
+rule "Booking data with not null qty exists"
+	when
+		$booking      : Booking( $qty : qty != null )
+	then
+		log.info("You've got a filled booking with qty {}", {$qty});
+end
+
+rule "Booking data with null qty exists" 
+	when
+		$booking      : Booking( qty == null )
+	then
+		log.info("You've got a NULL booking");
+end
+
+rule "BookingService can return null qty" 
+	when
+		Double( this == null ) from bookingService.getNullQty()
+	then
+		log.info("BookingService can return NULL qty");
+end
+
+rule "BookingService can return filled qty" 
+	when
+		$qty      : Double() from bookingService.getFilledQty()
+	then
+		log.info("BookingService can return filled qty: {}", {$qty});
+end
+
+rule "Notify has null sentTime" 
+	when
+		$notify		: Notify( sentTime == null )
+	then
+		log.info("Notify has NULL sentTime");
+end
+
+rule "Notify has filled sentTime" 
+	when
+		$notify		: Notify( $sentTime : sentTime != null )
+	then
+		log.info("Notify has filled sentTime: {}", {$sentTime});
+end

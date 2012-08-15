@@ -1,0 +1,17 @@
+h1. Drools Null Check
+
+Running this on Drools 5.4.0  will output:
+
+bc. 00:18:17.186 [main] INFO  c.h.droolsnull.BookingService - getNullQty() called!
+00:18:17.189 [main] INFO  c.h.droolsnull.BookingService - getFilledQty() called!
+00:18:17.203 [main] INFO  c.hendyirawan.droolsnull.DroolsNull - Notify has filled sentTime: Thu Aug 16 00:18:17 WIT 2012
+00:18:17.204 [main] INFO  c.hendyirawan.droolsnull.DroolsNull - Notify has null sentTime
+00:18:17.205 [main] INFO  c.hendyirawan.droolsnull.DroolsNull - You've got a good booking with qty 5.0
+00:18:17.205 [main] INFO  c.hendyirawan.droolsnull.DroolsNull - You've got a NULL booking
+00:18:17.205 [main] INFO  c.hendyirawan.droolsnull.DroolsNull - BookingService can return filled qty: 10.0
+
+Expected is one more:
+
+bc. BookingService can return NULL qty
+
+@BookingService.getNullQty()@ is called by the Drools rule but then ignored. How to capture this?
